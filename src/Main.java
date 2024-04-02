@@ -19,6 +19,7 @@ public class Main {
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
             perceptron.train(trainSet);
+            perceptron.accuracy(testSet);
 
         } catch (IOException e) {
             System.out.println("There is an error while loading file");
