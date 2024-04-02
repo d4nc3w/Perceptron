@@ -2,10 +2,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    private double[] weights;
-    private double bias;
-    private double learningRate;
-    private List<double[]> trainingSet;
 
     public static void main(String[] args) {
         String trainSetFile = "perceptron.data";
