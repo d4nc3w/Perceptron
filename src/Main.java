@@ -9,6 +9,8 @@ public class Main {
         FileHandler fh = new FileHandler();
         try {
             List<double[]> trainSet = fh.loadTrainSet(trainSetFile);
+            List<double[]> testSet = fh.loadTestSet(testSetFile);
+
         } catch (IOException e) {
             System.out.println("There is an error while loading file");
         }
