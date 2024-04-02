@@ -10,10 +10,10 @@ public class FileHandler {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
 
-        while((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             String[] values = line.split(",");
-            double[] input = new double[values.length];
-            for(int i = 0; i < values.length; i++){
+            double[] input = new double[values.length - 1];
+            for (int i = 0; i < values.length - 1; i++) {
                 input[i] = Double.parseDouble(values[i]);
             }
             trainSet.add(input);
@@ -22,15 +22,15 @@ public class FileHandler {
         return trainSet;
     }
 
-    public List<double[]> loadTestSet(String file) throws IOException{
+    public List<double[]> loadTestSet(String file) throws IOException {
         List<double[]> testSet = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
 
         while ((line = reader.readLine()) != null) {
             String[] values = line.split(",");
-            double[] input = new double[values.length];
-            for (int i = 0; i < values.length; i++) {
+            double[] input = new double[values.length - 1];
+            for (int i = 0; i < values.length - 1; i++) {
                 input[i] = Double.parseDouble(values[i]);
             }
             testSet.add(input);
@@ -43,6 +43,6 @@ public class FileHandler {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line = reader.readLine();
         reader.close();
-        return line.split(",").length - 1; // Exclude the target class
+        return line.split(",").length - 1;
     }
 }

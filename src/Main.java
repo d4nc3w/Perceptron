@@ -4,8 +4,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        String trainSetFile = "perceptron.data";
-        String testSetFile = "perceptron.test.data";
+        String trainSetFile = "./res/perceptron.data";
+        String testSetFile = "./res/perceptron.test.data";
         double learningRate = 0.01;
 
         FileHandler fh = new FileHandler();
@@ -15,10 +15,12 @@ public class Main {
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
             perceptron.train(trainSet);
-            perceptron.accuracy(testSet);
+            double accuracy = perceptron.accuracy(testSet);
+
+            System.out.println("Accuracy for this model: " + accuracy);
 
         } catch (IOException e) {
-            System.out.println("There is an error while loading file");
+            e.printStackTrace();
         }
     }
 }
