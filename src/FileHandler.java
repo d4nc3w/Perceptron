@@ -38,4 +38,11 @@ public class FileHandler {
         reader.close();
         return testSet;
     }
+
+    public static int getNumInputs(String filePath) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line = reader.readLine();
+        reader.close();
+        return line.split(",").length - 1; // Exclude the target class
+    }
 }
