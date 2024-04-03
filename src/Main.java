@@ -9,13 +9,14 @@ public class Main {
         double learningRate = 0.01;
 
         FileHandler fh = new FileHandler();
+
         try {
             List<double[]> trainSet = fh.loadTrainSet(trainSetFile);
             List<double[]> testSet = fh.loadTestSet(testSetFile);
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
-            perceptron.train(trainSet, 1);
-            double accuracy = perceptron.accuracy(testSet);
+            perceptron.train(trainSet, 10);
+            double accuracy = perceptron.accuracy(testSet, fh.getClassNames());
 
             System.out.println("Accuracy for this model: " + accuracy);
 

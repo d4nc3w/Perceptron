@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -14,13 +15,14 @@ public class Perceptron {
         initializeWeights();
     }
 
-    public void train(List<double[]> trainSet, int repeat) {
+    public void train(List<double[]> trainSet, int numIterations) {
         this.trainingSet = trainSet;
-        for (int r = 0; r < repeat; r++) {
+        for (int iteration = 0; iteration < numIterations; iteration++) {
             for (double[] input : trainingSet) {
-                double prediction = predict(input);
+                String prediction = predict(input);
+                double predictionValue =  prediction.equals("Iris-versicolor") ? 0 : 1;
                 double real = input[input.length - 1];
-                double error = real - prediction;
+                double error = real - predictionValue;
 
                 for (int i = 0; i < weights.length; i++) {
                     weights[i] += learnRate * error * input[i];
@@ -30,38 +32,45 @@ public class Perceptron {
         }
     }
 
-    public double predict(double[] input){
-        double sum = 0;
+
+    public String predict(double[] input){
+        double sum = bias;
         for(int i = 0; i < input.length - 1; i++){
             sum += input[i] * weights[i];
         }
         sum += bias;
 
         //activation function (step fun.)
-        //return sum > 0 ? 1 : 0;
+        double activation =  sum >= 0 ? 1 : 0;
 
         //activation function (sign function)
-        //return sum > 0 ? 1 : -1;
+        //double activation =  sum > 0 ? 1 : -1;
 
         //activation function (sigmoid function)
-        return Math.signum(sum);
+        //double activation = Math.signum(sum);
+
+        if (activation == 0)
+            return "Iris-versicolor";
+        else
+            return "Iris-virginica";
     }
 
-    public double accuracy(List<double[]> testSet){
+    public double accuracy(List<double[]> testSet, List<String> classNames){
         int correct = 0;
-        int total = 0;
-        for(double[] input : testSet){
-            double prediction = predict(input);
-            double real = input[input.length - 1];
+        int total = testSet.size();
 
-            System.out.println("Prediction: " + prediction + ", Real: " + real);
+        for (int i = 0; i < total; i++) {
+            double[] input = testSet.get(i);
+            String prediction = predict(input);
+            String real = classNames.get(i);
 
-            if(prediction == real){
+            System.out.println("Prediction: " + prediction + " Real: " + real);
+
+            if(prediction.equals(real)){
                 correct++;
             }
-            total++;
         }
-        double acc = (double) correct/total;
+        double acc = (double) correct / total;
         return acc;
     }
 
