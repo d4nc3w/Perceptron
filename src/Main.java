@@ -14,7 +14,7 @@ public class Main {
             List<double[]> testSet = fh.loadTestSet(testSetFile);
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
-            perceptron.train(trainSet);
+            perceptron.train(trainSet, 1);
             double accuracy = perceptron.accuracy(testSet);
 
             System.out.println("Accuracy for this model: " + accuracy);
