@@ -13,10 +13,12 @@ public class Main {
         try {
             List<double[]> trainSet = fh.loadTrainSet(trainSetFile);
             List<double[]> testSet = fh.loadTestSet(testSetFile);
+            List<Double> classLabels = fh.getClassLabels();
+            List<Double> classTrainLabels = fh.getClassTrainLabels();
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
-            perceptron.train(trainSet, 10);
-            double accuracy = perceptron.accuracy(testSet, fh.getClassNames());
+            perceptron.train(trainSet, classTrainLabels,500);
+            double accuracy = perceptron.accuracy(testSet, classLabels);
 
             System.out.println("Accuracy for this model: " + accuracy);
 

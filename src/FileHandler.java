@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileHandler {
-    private List<String> classNames;
+    private List<Double> classLabels;
+    private List<Double> classTrainLabels;
+
+
     public FileHandler() {
-        classNames = new ArrayList<>();
+        classLabels = new ArrayList<>();
+        classTrainLabels = new ArrayList<>();
     }
+
     public List<double[]> loadTrainSet(String file) throws IOException {
         List<double[]> trainSet = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -21,6 +26,8 @@ public class FileHandler {
                 input[i] = Double.parseDouble(values[i]);
             }
             trainSet.add(input);
+            double classNameDouble = values[values.length - 1].equals("Iris-versicolor") ? 1.0 : 0.0;
+            classTrainLabels.add(classNameDouble);
         }
         reader.close();
         return trainSet;
@@ -39,7 +46,8 @@ public class FileHandler {
                 input[i] = Double.parseDouble(values[i]);
             }
             testSet.add(input);
-            classNames.add(values[values.length - 1]);
+            double classNameDouble = values[values.length - 1].equals("Iris-versicolor") ? 1.0 : 0.0;
+            classLabels.add(classNameDouble);
         }
         reader.close();
         return testSet;
@@ -52,7 +60,11 @@ public class FileHandler {
         return line.split(",").length - 1;
     }
 
-    public List<String> getClassNames() {
-        return classNames;
+    public List<Double> getClassLabels() {
+        return classLabels;
+    }
+
+    public List<Double> getClassTrainLabels(){
+        return classTrainLabels;
     }
 }
