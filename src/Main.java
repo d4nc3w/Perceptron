@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -32,11 +33,12 @@ public class Main {
     }
 
     private static void simpleUI(Perceptron perceptron, String trainSetFile) throws IOException {
-        System.out.println("--------Perceptron Program--------");
-        System.out.println("Do you want to classify your own vector? (y/n): ");
+        System.out.println("------------------MENU------------------");
+        System.out.println("(1) Classify another vector");
+        System.out.println("(2) Exit");
         Scanner scanner = new Scanner(System.in);
-        String choice = scanner.next();
-        if (choice.equals("y")) {
+        int choice = scanner.nextInt();
+        if (choice == 1) {
             System.out.println("(1) Generate random");
             System.out.println("(2) Type data yourself");
             Scanner c = new Scanner(System.in);
@@ -60,6 +62,7 @@ public class Main {
                 System.out.println("Predicted class: " + prediction);
                 String className = prediction == 1.0 ? "Iris-versicolor" : "Iris-virginica";
                 System.out.println("For perceptron.test.data: " + className);
+                simpleUI(perceptron, trainSetFile);
 
             } else if (input == 2) { //Typing data yourself
                 System.out.println("Enter values of your vector format=(x.x,y.y,w.w,z.z): ");
@@ -75,11 +78,12 @@ public class Main {
                 System.out.println("Predicted class: " + prediction);
                 String className = prediction == 1.0 ? "Iris-versicolor" : "Iris-virginica";
                 System.out.println("For perceptron.test.data: " + className);
+                simpleUI(perceptron, trainSetFile);
             } else {
                 System.out.println("Invalid choice.");
             }
-        } else if (choice.equals("n")) {
-            System.out.println("Goodbye!");
+        } else if (choice == 2) {
+            System.out.println("Closing the program...");
         } else {
             System.out.println("Wrong input.");
         }
