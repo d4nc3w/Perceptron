@@ -48,6 +48,8 @@ public class Main {
 
             double prediction = perceptron.predict(vector);
             System.out.println("Predicted class: " + prediction);
+            String className = prediction == 1 ? "Iris-versicolor" : "Iris-virginica";
+            System.out.println("For perceptron.test.data: " + className);
 
         }
         else if (choice.equals("n")) {
