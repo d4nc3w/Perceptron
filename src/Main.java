@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -22,8 +23,38 @@ public class Main {
 
             System.out.println("Accuracy for this model: " + accuracy);
 
+            simpleUI(perceptron);
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void simpleUI(Perceptron perceptron){
+        System.out.println("--------Perceptron Program--------");
+        System.out.println("Do you want to classify your own vector? (y/n): ");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.next();
+        if (choice.equals("y")){
+            System.out.println("Enter values of your vector format=(x.x,y.y,w.w,z.z): ");
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+
+            String[] inputValues = input.split(",");
+            double[] vector = new double[inputValues.length];
+            for (int i = 0; i < inputValues.length; i++) {
+                vector[i] = Double.parseDouble(inputValues[i].trim());
+            }
+
+            double prediction = perceptron.predict(vector);
+            System.out.println("Predicted class: " + prediction);
+
+        }
+        else if (choice.equals("n")) {
+            System.out.println("Goodbye!");
+        }
+        else {
+            System.out.println("Wrong input.");
         }
     }
 }
