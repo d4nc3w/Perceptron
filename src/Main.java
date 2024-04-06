@@ -21,8 +21,10 @@ public class Main {
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
             perceptron.train(trainSet, classTrainLabels,500);
+            System.out.println("----------Training----------");
             double accuracy = perceptron.accuracy(testSet, classLabels);
 
+            System.out.println("-------------------------------");
             System.out.println("Accuracy for this model: " + accuracy);
 
             simpleUI(perceptron, trainSetFile);
@@ -84,6 +86,7 @@ public class Main {
             }
         } else if (choice == 2) {
             System.out.println("Closing the program...");
+            System.out.println("----------------------------------------");
         } else {
             System.out.println("Wrong input.");
         }
