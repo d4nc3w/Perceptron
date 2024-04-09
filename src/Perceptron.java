@@ -21,7 +21,7 @@ public class Perceptron {
                 for (int k = 0; k < weights.length; k++) {
                     weights[k] += learnRate * (target - predicted) * instance[k];
                 }
-                bias += learnRate * (target - predicted);
+                bias -= learnRate * (target - predicted);
             }
         }
     }
@@ -32,16 +32,16 @@ public class Perceptron {
             net += input[i] * weights[i];
         }
 
-        net += bias;
+        net -= bias;
 
         //activation function (step fun.)
         return net >= 0 ? 1 : 0;
 
-        //activation function (sign function)
-        //double activation =  sum > 0 ? 1 : -1;
+        /*//activation function (sign function)
+        double activation =  sum > 0 ? 1 : -1;
 
         //activation function (sigmoid function)
-        //double activation = Math.signum(sum);
+        double activation = Math.signum(sum);*/
     }
 
     public double accuracy(List<double[]> testSet, List<Double> classLabels) {

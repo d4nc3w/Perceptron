@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,7 +19,7 @@ public class Main {
             List<Double> classTrainLabels = fh.getClassTrainLabels();
 
             Perceptron perceptron = new Perceptron(FileHandler.getNumInputs(trainSetFile), learningRate);
-            perceptron.train(trainSet, classTrainLabels,500);
+            perceptron.train(trainSet, classTrainLabels,1000);
             System.out.println("----------Training----------");
             double accuracy = perceptron.accuracy(testSet, classLabels);
 
